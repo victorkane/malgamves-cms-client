@@ -2,6 +2,7 @@ import Description from "@/components/Description"
 import PageContainer from "@/components/PageContainer"
 import Main from "@/components/Main"
 import Title from "@/components/Title"
+import List from "@/components/List"
 
 export default async function Home() {
   const data = await getPosts()
@@ -11,11 +12,7 @@ export default async function Home() {
       <Main>
         <Title>words from others (for me)</Title>
         <Description>a recipe for disaster</Description>
-        <div className="text-red-900">
-          {data.data.map((post) => (
-            <div key={post.attributes.slug}>{post.attributes.title}</div>
-          ))}
-        </div>
+        <List allPosts={data} />
       </Main>
     </PageContainer>
   )
