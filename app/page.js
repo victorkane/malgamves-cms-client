@@ -4,8 +4,10 @@ import Main from "@/components/Main"
 import Title from "@/components/Title"
 import List from "@/components/List"
 
-export default async function Home() {
-  const data = await getPosts()
+export default async function Home({ searchParams }) {
+  const { page } = searchParams
+  const pageParam = page === undefined ? 1 : page
+  const data = await getPosts(pageParam)
 
   return (
     <PageContainer>
@@ -18,8 +20,10 @@ export default async function Home() {
   )
 }
 
-async function getPosts() {
-  const res = await fetch(`${process.env.API_URL}/api/posts`)
+async function getPosts(pageParam) {
+  const res = await fetch(
+    `${process.env.API_URL}/api/posts?pagination[page]=${pageParam}&pagination[pageSize]=3`
+  )
 
   if (!res.ok) {
     throw new Error("Failed to fetch data from API")
