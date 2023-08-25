@@ -3,14 +3,25 @@ import PageContainer from "@/components/PageContainer"
 import Main from "@/components/Main"
 import Title from "@/components/Title"
 
-export default function Blog({ params }) {
+export default async function Blog({ params }) {
   const { slug } = params
+  const data = await getPage(slug)
+  const post = data.data[0]
   return (
     <PageContainer>
       <Main>
-        <Title>{slug}</Title>
-        <Description>This is a page called {slug}</Description>
+        <Title>{post.attributes.title}</Title>
       </Main>
     </PageContainer>
   )
+}
+
+async function getPage(pageSlug) {
+  const res = await fetch(
+    `${process.env.API_URL}/api/posts?filters[slug][$eq]=${pageSlug}`
+  )
+  if (!res.ok) {
+    throw new Error("Failed to fetch data from API")
+  }
+  return res.json()
 }
