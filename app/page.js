@@ -3,6 +3,7 @@ import PageContainer from "@/components/PageContainer"
 import Main from "@/components/Main"
 import Title from "@/components/Title"
 import List from "@/components/List"
+import Pagination from "@/components/Pagination"
 
 export default async function Home({ searchParams }) {
   const { page } = searchParams
@@ -15,6 +16,7 @@ export default async function Home({ searchParams }) {
         <Title>words from others (for me)</Title>
         <Description>a recipe for disaster</Description>
         <List allPosts={data} />
+        <Pagination paginationData={data.meta.pagination} />
       </Main>
     </PageContainer>
   )
