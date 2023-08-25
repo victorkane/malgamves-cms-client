@@ -12,8 +12,8 @@ const Hello = () => {
         <Description>
           Click to see the template used to create this
           <Link
+            className="text-red-500"
             href="https://github.com/malgamves/next-13-website-template"
-            style={{ color: "rgb(239, 68, 68)" }}
           >
             {" "}
             course{" "}
